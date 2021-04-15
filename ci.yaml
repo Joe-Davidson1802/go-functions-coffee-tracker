@@ -23,22 +23,6 @@ steps:
   - --entry-point=Submit
   - --allow-unauthenticated
   - --runtime=go113
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  args:
-  - gcloud
-  - functions
-  - add-iam-policy-binding
-  - submit-data
-  - --member="allAuthenticatedUsers"
-  - --role="roles/cloudfunctions.invoker"
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  args:
-  - gcloud
-  - functions
-  - add-iam-policy-binding
-  - search-by-barcode
-  - --member="allAuthenticatedUsers"
-  - --role="roles/cloudfunctions.invoker"
 - name: "gcr.io/cloud-builders/npm"
   dir: 'web/coffee-track'
   entrypoint: npm
