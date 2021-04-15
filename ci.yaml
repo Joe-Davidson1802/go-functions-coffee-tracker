@@ -29,7 +29,7 @@ steps:
   - functions
   - add-iam-policy-binding
   - submit-data
-  - --member="allUsers"
+  - --member="allAuthenticatedUsers"
   - --role="roles/cloudfunctions.invoker"
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
@@ -37,7 +37,7 @@ steps:
   - functions
   - add-iam-policy-binding
   - search-by-barcode
-  - --member="allUsers"
+  - --member="allAuthenticatedUsers"
   - --role="roles/cloudfunctions.invoker"
 - name: "gcr.io/cloud-builders/npm"
   dir: 'web/coffee-track'
