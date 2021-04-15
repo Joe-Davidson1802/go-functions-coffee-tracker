@@ -1,0 +1,13 @@
+POST https://us-central1-plasma-myth-310415.cloudfunctions.net/testFunction
+
+{
+    "barcode": "1234",
+    "grind": 2.4,
+    "seconds": 39,
+    "in": 17.9,
+    "out": 20
+}
+
+###
+
+GET https://us-central1-plasma-myth-310415.cloudfunctions.net/searchFunction?barcode=1234

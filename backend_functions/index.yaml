@@ -1,0 +1,7 @@
+indexes:
+  - kind: Record
+    ancestor: no
+    properties:
+    - name: Barcode
+    - name: Created
+      direction: asc
