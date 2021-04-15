@@ -7,14 +7,13 @@ import SubmitRecord from "./pages/SubmitRecord";
 import Home from "./pages/Home";
 import axios from "axios";
 import Search from "./pages/Search";
+import Nav from "./components/Nav";
 
 function App() {
   axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
   return (
     <BrowserRouter>
-      <Link to="/submit">New Record</Link>
-      <br></br>
-      <Link to="/search">Find grinds by barcode</Link>
+      <Nav />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/submit" exact component={SubmitRecord} />

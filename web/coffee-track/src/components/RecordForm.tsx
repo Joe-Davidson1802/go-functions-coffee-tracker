@@ -30,44 +30,77 @@ const RecordForm = () => {
     setBarcode(result);
   };
 
+  const RecordInput = (props: {
+    name: string;
+    update: (val: string) => void;
+  }) => {
+    const { name, update } = props;
+    return (
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label">{name}</label>
+        </div>
+        <div className="field-body is-expanded">
+          <div className="field">
+            <div className="control">
+              <input
+                className="input"
+                value={barcode}
+                onChange={(e) => update(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          Barcode:
-          <input value={barcode} onChange={(e) => setBarcode(e.target.value)} />
-        </label>
-        <button onClick={() => setScan(true)}>Scan</button>
-        {scanning ? <BarcodeScanner onScanned={scanned} scan={scanning} /> : ""}
-      </div>
-      <div>
-        <label>
-          Grind Size:
-          <input value={grind} onChange={(e) => setGrind(e.target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          In:
-          <input value={weightIn} onChange={(e) => setIn(e.target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Out:
-          <input value={out} onChange={(e) => setOut(e.target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Seconds:
-          <input value={seconds} onChange={(e) => setSeconds(e.target.value)} />
-        </label>
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <div className="container">
+      {scanning ? <BarcodeScanner onScanned={scanned} scan={scanning} /> : ""}
+      <form onSubmit={handleSubmit}>
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label">Barcode</label>
+          </div>
+          <div className="field-body is-expanded">
+            <div className="field has-addons">
+              <div className="control">
+                <input
+                  className="input"
+                  value={barcode}
+                  onChange={(e) => setBarcode(e.target.value)}
+                />
+              </div>
+              <div className="control">
+                <button
+                  className="button is-primary"
+                  onClick={() => setScan(!scanning)}
+                >
+                  Scan
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <RecordInput name="Grind Size" update={setGrind} />
+        <RecordInput name="Dose In" update={setIn} />
+        <RecordInput name="Dose Out" update={setOut} />
+        <RecordInput name="Brew Seconds" update={setSeconds} />
+        <div className="field is-horizontal">
+          <div className="field-label"></div>
+          <div className="field-body">
+            <div className="field">
+              <div className="control">
+                <button type="submit" className="button is-primary">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

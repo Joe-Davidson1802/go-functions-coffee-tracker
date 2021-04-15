@@ -47,12 +47,30 @@ const Search = () => {
   };
 
   return (
-    <div>
-      <input value={barcode} onChange={handleInput} />
-      <button onClick={() => setScan(true)}>Scan</button>
+    <div className="container">
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label">Barcode</label>
+        </div>
+        <div className="field-body is-expanded">
+          <div className="field has-addons">
+            <div className="control">
+              <input className="input" value={barcode} onChange={handleInput} />
+            </div>
+            <div className="control">
+              <button
+                className="button is-primary"
+                onClick={() => setScan(!scanning)}
+              >
+                Scan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       {scanning ? <BarcodeScanner onScanned={scanned} scan={scanning} /> : ""}
       {records ? (
-        <table>
+        <table className="table">
           <tr>
             <th>Date</th>
             <th>Grind Size</th>
