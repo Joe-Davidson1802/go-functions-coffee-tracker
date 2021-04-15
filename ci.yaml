@@ -1,0 +1,37 @@
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+  - gcloud
+  - functions
+  - deploy
+  - search-by-barcode
+  - --region=europe-west2
+  - --source=./backend_functions/.
+  - --trigger-http
+  - --entry-point=Search
+  - --allow-unauthenticated
+  - --runtime=go113
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+  - gcloud
+  - functions
+  - deploy
+  - submit-data
+  - --region=europe-west2
+  - --source=./backend_functions/.
+  - --trigger-http
+  - --entry-point=Submit
+  - --allow-unauthenticated
+  - --runtime=go113
+- name: "gcr.io/cloud-builders/npm"
+  dir: 'web/coffee-track'
+  entrypoint: npm
+  args: ['install']
+- name: "gcr.io/cloud-builders/npm"
+  dir: 'web/coffee-track'
+  entrypoint: npm
+  args: ["run", "build"]
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gsutil'
+  dir: 'web/coffee-track'
+  args: ["cp", "-r", "build/*", "gs://coffee-tracker-web"]
