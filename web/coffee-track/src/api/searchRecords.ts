@@ -1,9 +1,9 @@
-import axios from "axios"
 
 import {Record} from '../types/Record'
+import api from './api';
 
 const searchRecords = async (barcode: string) => {
-    const response = await axios.get<Record[]>('/search-by-barcode', {
+    const response = await api.get<Record[]>('/search-by-barcode', {
         params: {
             barcode
         }

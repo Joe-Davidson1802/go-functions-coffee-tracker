@@ -10,7 +10,6 @@ import Search from "./pages/Search";
 import Nav from "./components/Nav";
 
 function App() {
-  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
   return (
     <BrowserRouter>
       <Nav />
