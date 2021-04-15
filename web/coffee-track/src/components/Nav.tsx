@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
+  const [expanded, setExpanded] = useState(false);
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -11,9 +12,10 @@ const Nav = () => {
 
         <a
           role="button"
-          className="navbar-burger"
+          className={"navbar-burger " + (expanded ? "is-active" : "")}
           aria-label="menu"
-          aria-expanded="false"
+          aria-expanded={expanded}
+          onClick={() => setExpanded(!expanded)}
           data-target="navbarBasicExample"
         >
           <span aria-hidden="true"></span>
@@ -22,7 +24,10 @@ const Nav = () => {
         </a>
       </div>
 
-      <div id="navbarBasicExample" className="navbar-menu">
+      <div
+        id="navbarBasicExample"
+        className={"navbar-menu " + (expanded ? "is-active" : "")}
+      >
         <div className="navbar-start">
           <div className="navbar-item">
             <div className="buttons">

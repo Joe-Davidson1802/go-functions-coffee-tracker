@@ -43,7 +43,7 @@ const Search = () => {
   const scanned = (result: string) => {
     console.log(result);
     setScan(false);
-    setBarcode(result);
+    if (result) setBarcode(result);
   };
 
   return (

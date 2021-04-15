@@ -27,14 +27,15 @@ const RecordForm = () => {
   const scanned = (result: string) => {
     console.log(result);
     setScan(false);
-    setBarcode(result);
+    if (result) setBarcode(result);
   };
 
   const RecordInput = (props: {
     name: string;
+    value: string;
     update: (val: string) => void;
   }) => {
-    const { name, update } = props;
+    const { name, update, value } = props;
     return (
       <div className="field is-horizontal">
         <div className="field-label is-normal">
@@ -45,7 +46,7 @@ const RecordForm = () => {
             <div className="control">
               <input
                 className="input"
-                value={barcode}
+                value={value}
                 onChange={(e) => update(e.target.value)}
               />
             </div>
@@ -83,10 +84,10 @@ const RecordForm = () => {
             </div>
           </div>
         </div>
-        <RecordInput name="Grind Size" update={setGrind} />
-        <RecordInput name="Dose In" update={setIn} />
-        <RecordInput name="Dose Out" update={setOut} />
-        <RecordInput name="Brew Seconds" update={setSeconds} />
+        <RecordInput name="Grind Size" update={setGrind} value={grind} />
+        <RecordInput name="Dose In" update={setIn} value={weightIn} />
+        <RecordInput name="Dose Out" update={setOut} value={out} />
+        <RecordInput name="Brew Seconds" update={setSeconds} value={seconds} />
         <div className="field is-horizontal">
           <div className="field-label"></div>
           <div className="field-body">

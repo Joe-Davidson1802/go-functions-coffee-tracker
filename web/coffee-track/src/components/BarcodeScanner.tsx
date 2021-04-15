@@ -18,7 +18,29 @@ const BarcodeScanner = (props: ScannerProps) => {
     onScanned(r.codeResult.code);
   };
 
-  return <div>{scan ? <Scanner onDetected={detected} /> : ""}</div>;
+  const close = () => {
+    setResult("");
+    onScanned("");
+  };
+
+  return (
+    <div className="modal is-active">
+      <div className="modal-background"></div>
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">Scanner</p>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={close}
+          ></button>
+        </header>
+        <section className="modal-card-body">
+          {scan ? <Scanner onDetected={detected} /> : ""}
+        </section>
+      </div>
+    </div>
+  );
 };
 
 export default BarcodeScanner;
