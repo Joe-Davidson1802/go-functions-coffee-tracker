@@ -38,5 +38,5 @@ steps:
   args: ["cp", "-r", "build/*", "gs://coffee-tracker-web"]
 availableSecrets:
   secretManager:
-    - versionName: projects/$PROJECT_ID/secrets/google-client-id
+    - versionName: projects/$PROJECT_NUMBER/secrets/google-client-id
       env: 'REACT_APP_GOOGLE_CLIENT_ID'
