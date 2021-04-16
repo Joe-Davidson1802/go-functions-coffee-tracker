@@ -8,15 +8,41 @@ import Home from "./pages/Home";
 import axios from "axios";
 import Search from "./pages/Search";
 import Nav from "./components/Nav";
+import store from "./store";
+import { Login } from "./components/Login";
+
+function SignedIn() {
+  return (
+    <>
+      <Link className="button is-primary" to="/submit">
+        <strong>New Entry</strong>
+      </Link>
+      <Link className="button is-secondary" to="/search">
+        Search
+      </Link>
+    </>
+  );
+}
+
+function NotSignedIn() {
+  return <Login />;
+}
 
 function App() {
+  const signedIn = store.useState((s) => s.isSignedIn);
   return (
     <BrowserRouter>
       <Nav />
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/submit" exact component={SubmitRecord} />
-        <Route path="/search" exact component={Search} />
+        {signedIn ? (
+          <Route path="/submit" exact component={SubmitRecord} />
+        ) : null}
+        {signedIn ? <Route path="/search" exact component={Search} /> : null}
+        {signedIn ? (
+          <Route path="/" component={SignedIn} />
+        ) : (
+          <Route path="/" component={NotSignedIn} />
+        )}
       </Switch>
     </BrowserRouter>
   );
