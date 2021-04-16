@@ -35,7 +35,7 @@ steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'gsutil'
   dir: 'web/coffee-track'
-  args: ["rsync", "-R", "build", "gs://host-makers.com"]
+  args: ["rsync", "-R", "build", "gs://coffee.joe-davidson.net"]
 availableSecrets:
   secretManager:
     - versionName: projects/$PROJECT_NUMBER/secrets/google-client-id/versions/latest
