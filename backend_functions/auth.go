@@ -8,7 +8,7 @@ import (
 )
 
 type AccessDetails struct {
-	sub int64
+	sub string `json:"sub"`
 }
 
 func ExtractToken(r *http.Request) string {
@@ -21,13 +21,13 @@ func ExtractToken(r *http.Request) string {
 	return ""
 }
 
-func VerifyToken(r *http.Request) (int64, error) {
+func VerifyToken(r *http.Request) (string, error) {
 	tokenString := ExtractToken(r)
 
 	var client http.Client
 	resp, err := client.Get("https://oauth2.googleapis.com/tokeninfo?id_token=" + tokenString)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 	defer resp.Body.Close()
 
@@ -36,5 +36,5 @@ func VerifyToken(r *http.Request) (int64, error) {
 		json.NewDecoder(resp.Body).Decode(access)
 		return access.sub, nil
 	}
-	return 0, errors.New("Non OK Response")
+	return "", errors.New("Non OK Response")
 }
