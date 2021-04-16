@@ -32,6 +32,8 @@ func Submit(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	rec.UserId = r.Header.Get("X-Goog-Authenticated-User-ID")
+
 	result, err := PutRecord(rec, ctx)
 
 	if err != nil {
