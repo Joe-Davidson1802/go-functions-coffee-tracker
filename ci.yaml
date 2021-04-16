@@ -9,7 +9,6 @@ steps:
   - --source=./backend_functions/.
   - --trigger-http
   - --entry-point=Search
-  - --allow-unauthenticated
   - --runtime=go113
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
@@ -21,7 +20,6 @@ steps:
   - --source=./backend_functions/.
   - --trigger-http
   - --entry-point=Submit
-  - --allow-unauthenticated
   - --runtime=go113
 - name: "gcr.io/cloud-builders/npm"
   dir: 'web/coffee-track'
