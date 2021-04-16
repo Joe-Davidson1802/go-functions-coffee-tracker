@@ -32,7 +32,14 @@ func Submit(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rec.UserId = r.Header.Get("X-Goog-Authenticated-User-ID")
+	id, err := VerifyToken(r)
+
+	if err != nil {
+		http.Error(w, "unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	rec.UserId = id
 
 	result, err := PutRecord(rec, ctx)
 
