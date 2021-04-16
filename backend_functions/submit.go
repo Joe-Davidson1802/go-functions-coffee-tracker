@@ -5,6 +5,8 @@ import (
 	"net/http"
 
 	"google.golang.org/appengine"
+
+	_ "github.com/motemen/go-loghttp/global"
 )
 
 // Respond - Respond

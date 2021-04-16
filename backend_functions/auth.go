@@ -3,6 +3,8 @@ package function
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -34,6 +36,7 @@ func VerifyToken(r *http.Request) (string, error) {
 	if resp.StatusCode == http.StatusOK {
 		var access AccessDetails
 		json.NewDecoder(resp.Body).Decode(access)
+		log.Println(fmt.Sprintf("User token requested, {0}", newKey.ID))
 		return access.sub, nil
 	}
 	return "", errors.New("Non OK Response")
