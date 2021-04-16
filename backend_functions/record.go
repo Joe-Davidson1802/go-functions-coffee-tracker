@@ -12,7 +12,7 @@ type Record struct {
 	In        float64   `json:"in" validate:"required"`
 	OUt       float64   `json:"out" validate:"required"`
 	Seconds   float64   `json:"seconds" validate:"required"`
-	UserId    uint64    `json:"userId"`
+	UserId    int64     `json:"userId"`
 	Created   time.Time `json:"created"`
 }
 

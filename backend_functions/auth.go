@@ -8,7 +8,7 @@ import (
 )
 
 type AccessDetails struct {
-	sub uint64
+	sub int64
 }
 
 func ExtractToken(r *http.Request) string {
@@ -21,7 +21,7 @@ func ExtractToken(r *http.Request) string {
 	return ""
 }
 
-func VerifyToken(r *http.Request) (uint64, error) {
+func VerifyToken(r *http.Request) (int64, error) {
 	tokenString := ExtractToken(r)
 
 	var client http.Client
