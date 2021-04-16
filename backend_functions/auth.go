@@ -2,10 +2,9 @@ package function
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"strings"
-
-	"google.golang.org/protobuf/internal/errors"
 )
 
 type AccessDetails struct {
