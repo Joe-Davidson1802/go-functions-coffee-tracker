@@ -1,5 +1,6 @@
 steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  waitFor: ['-']
   args:
   - gcloud
   - functions
@@ -11,6 +12,7 @@ steps:
   - --entry-point=Search
   - --runtime=go113
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  waitFor: ['-']
   args:
   - gcloud
   - functions
@@ -22,15 +24,21 @@ steps:
   - --entry-point=Submit
   - --runtime=go113
 - name: "gcr.io/cloud-builders/npm"
+  id: Inst
+  waitFor: ['-']
   dir: 'web/coffee-track'
   entrypoint: npm
   args: ['install']
 - name: "gcr.io/cloud-builders/npm"
+  id: Build
+  waitFor: [Inst]
   dir: 'web/coffee-track'
   entrypoint: npm
   args: ["run", "build"]
   secretEnv: ['REACT_APP_GOOGLE_CLIENT_ID']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  id: Dep
+  waitFor: ['Build']
   entrypoint: 'gsutil'
   dir: 'web/coffee-track'
   args: ["rsync", "-R", "build", "gs://coffee.joe-davidson.net"]
