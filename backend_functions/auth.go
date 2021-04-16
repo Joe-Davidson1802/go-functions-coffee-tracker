@@ -3,12 +3,13 @@ package function
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 	"strings"
 )
 
 type AccessDetails struct {
-	sub string `json:"sub"`
+	Sub string `json:"sub"`
 }
 
 func ExtractToken(r *http.Request) string {
@@ -34,7 +35,8 @@ func VerifyToken(r *http.Request) (string, error) {
 	if resp.StatusCode == http.StatusOK {
 		var access AccessDetails
 		json.NewDecoder(resp.Body).Decode(access)
-		return access.sub, nil
+		log.Printf("Got ID: {0}", access.Sub)
+		return access.Sub, nil
 	}
 	return "", errors.New("Non OK Response")
 }
