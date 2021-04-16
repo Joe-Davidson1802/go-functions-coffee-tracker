@@ -14,6 +14,13 @@ func Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	id, err := VerifyToken(r)
+
+	if err != nil {
+		http.Error(w, "unauthorized", http.StatusUnauthorized)
+		return
+	}
+
 	barcode := r.URL.Query()["barcode"]
 
 	if barcode == nil || len(barcode) < 1 {
@@ -21,7 +28,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, err := SearchByBarcode(barcode[0], ctx)
+	result, err := SearchByBarcode(barcode[0], id, ctx)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)

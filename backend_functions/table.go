@@ -20,7 +20,7 @@ func getClient(ctx context.Context) (*datastore.Client, error) {
 	return client, nil
 }
 
-func SearchByBarcode(bc string, ctx context.Context) (results []Record, err error) {
+func SearchByBarcode(bc string, id string, ctx context.Context) (results []Record, err error) {
 	client, err := getClient(ctx)
 
 	if err != nil {
@@ -31,6 +31,7 @@ func SearchByBarcode(bc string, ctx context.Context) (results []Record, err erro
 	q := datastore.
 		NewQuery("Record").
 		Filter("Barcode =", bc).
+		Filter("UserId =", id).
 		Order("Created")
 
 	var records []Record
