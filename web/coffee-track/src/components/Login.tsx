@@ -12,11 +12,15 @@ export const Login = () => {
 
   const onLogin = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
     const person = res as GoogleLoginResponse;
-    store.update((s) => (s.isSignedIn = true));
+    store.update((s) => {
+      s.isSignedIn = true;
+    });
     refreshTokenSetup(person);
   };
   const onLogout = () => {
-    store.update((s) => (s.isSignedIn = false));
+    store.update((s) => {
+      s.isSignedIn = false;
+    });
   };
   const onFailedLogin = (res: GoogleLoginResponse) => {
     console.log("Logged: ", res.profileObj);
